@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pallet Ross - Immobilier d'Exception</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-color: #000;
+            --primary-blue: #000;
+            --font-main: 'Satoshi', sans-serif;
+            --bubble-blue: #000;
+            --bubble-green: #000;
+        }
+
+        /* On s'assure que le document ne dépasse pas 100% */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Empêche le scroll horizontal */
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #fff;
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Conteneur principal qui fait 100% de la hauteur */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- LE HEADER --- */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background-color: transparent;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        /* Menu hamburger caché par défaut */
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text-color); }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .icon-btn:hover { background-color: #f7f7f7; }
+
+        /* --- LA SECTION HERO --- */
+        .hero {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            max-width: 800px;
+            margin-bottom: 40px;
+            letter-spacing: -1.5px;
+        }
+
+        /* --- LE CARROUSEL --- */
+        .art-carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 350px;
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: 40px;
+        }
+
+        .art-card {
+            width: 240px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            transition: transform 0.3s, z-index 0.3s;
+            margin-left: -120px;
+            background-color: #eee;
+        }
+
+        .art-card:first-child { margin-left: 0; }
+        .art-card img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-1 { transform: rotate(-5deg); z-index: 1; }
+        .card-2 { transform: rotate(-10deg); z-index: 2; }
+        .card-3 { transform: rotate(-2deg); z-index: 3; }
+        .card-4 { transform: rotate(8deg); z-index: 4; }
+        .card-5 { transform: rotate(15deg); z-index: 5; }
+        .card-6 { transform: rotate(10deg); z-index: 6; }
+
+        .art-card:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        .user-bubble {
+            position: absolute;
+            padding: 12px 20px;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 50;
+        }
+
+        .bubble-arrow {
+            position: absolute;
+            width: 15px; height: 15px;
+            background-color: inherit;
+            transform: rotate(45deg);
+        }
+
+        .bubble-left { background-color: var(--bubble-blue); top: 20px; left: 40px; }
+        .bubble-left .bubble-arrow { bottom: -7px; right: 30px; }
+        .bubble-right { background-color: var(--bubble-green); bottom: 20px; right: 40px; }
+        .bubble-right .bubble-arrow { top: -7px; left: 30px; }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 650px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #111;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: none;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* --- AJOUTS RESPONSIVE --- */
+
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3rem; }
+            .art-card { width: 200px; height: 260px; margin-left: -100px; }
+            .main-header { padding: 20px 30px; }
+        }
+
+        @media (max-width: 768px) {
+            html, body { overflow-y: auto; }
+
+            /* Afficher le bouton menu burger seulement sur mobile */
+            .mobile-menu-btn { 
+                display: flex; 
+            }
+
+            .logo { display: none; } /* Cacher le logo au centre pour le menu à gauche */
+            .nav-links { display: none; } /* Cacher les liens de navigation */
+
+            /* Cacher toutes les icônes de droite sauf la première (Profil) */
+            .header-actions .icon-btn:not(.user-btn) {
+                display: none;
+            }
+
+            .hero-title { font-size: 2.2rem; }
+            .hero-description { font-size: 1rem; }
+            .art-carousel { height: 280px; }
+            .art-card { width: 150px; height: 200px; margin-left: -70px; }
+            .bubble-left { left: 10px; top: -10px; }
+            .bubble-right { right: 10px; bottom: -10px; }
+            .hero-actions { flex-direction: column; width: 100%; align-items: center; }
+            .btn-primary, .btn-secondary { width: 100%; max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <header class="main-header">
+        <button class="icon-btn mobile-menu-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <div class="logo">
+            <svg class="logo-icon" width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M3 10.1667V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V10.1667" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 3V12M12 3L16 7M12 3L8 7" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 10.1667L12 3L2 10.1667" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Pallet Ross</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#">Acheter</a>
+            <a href="#" class="with-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                Estimer mon bien
+            </a>
+            <a href="#">Louer</a>
+            <a href="#">Investir</a>
+            <a href="#">Villas de luxe</a>
+            <a href="#">Agences</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="icon-btn user-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </button>
+            <button class="icon-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+            <button class="icon-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="hero">
+        <h1 class="hero-title">Une adresse d'exception pour chaque projet.</h1>
+
+        <div class="art-carousel">
+            <div class="user-bubble bubble-left">
+                <span class="user-tag">@lyon_luxe</span>
+                <div class="bubble-arrow"></div>
+            </div>
+
+            <div class="art-card card-1"><img src="m1.jpg" alt="Villa Moderne"></div>
+            <div class="art-card card-2"><img src="M2.png" alt="Loft Industriel"></div>
+            <div class="art-card card-3"><img src="M4.jpg" alt="Penthouse Vue Mer"></div>
+            <div class="art-card card-4"><img src="M5.jpg" alt="Manoir Historique"></div>
+            <div class="art-card card-5"><img src="M6.jpg" alt="Appartement Haussmannien"></div>
+            <div class="art-card card-6"><img src="M7.jpg" alt="Chalet de Prestige"></div>
+
+            <div class="user-bubble bubble-right">
+                <span class="user-tag">@paris_loft</span>
+                <div class="bubble-arrow"></div>
+            </div>
+        </div>
+
+        <p class="hero-description">
+            Plus qu'une agence, un curateur de biens rares. Les propriétaires exposent leurs chefs-d'œuvre architecturaux, et les acheteurs découvrent le lieu qui résonne avec leurs rêves.
+        </p>
+
+        <div class="hero-actions">
+            <button class="btn-primary">Explorer le catalogue</button>
+            <button class="btn-secondary">Parler à un expert</button>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
+
