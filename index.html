@@ -14,12 +14,11 @@
             --bubble-green: #000;
         }
 
-        /* On s'assure que le document ne dépasse pas 100% */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Empêche le scroll horizontal */
+            overflow-x: hidden;
         }
 
         body {
@@ -29,14 +28,13 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Conteneur principal qui fait 100% de la hauteur */
         .page-wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- LE HEADER --- */
+        /* --- HEADER --- */
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -44,12 +42,15 @@
             padding: 20px 60px;
             background-color: transparent;
             flex-shrink: 0;
-            z-index: 10;
+            z-index: 100;
         }
 
-        /* Menu hamburger caché par défaut */
         .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1100; /* Toujours au dessus de la carte */
         }
 
         .logo {
@@ -85,7 +86,7 @@
 
         .icon-btn {
             background: none;
-            border: 1px solid #e0e0e0;
+            border: 1px solid transparent;
             border-radius: 50%;
             width: 44px;
             height: 44px;
@@ -98,7 +99,45 @@
 
         .icon-btn:hover { background-color: #f7f7f7; }
 
-        /* --- LA SECTION HERO --- */
+        /* --- MENU MOBILE (MODIFIÉ EN PETITE CARTE) --- */
+        .mobile-overlay {
+            position: fixed;
+            top: 80px; /* Juste en dessous du header */
+            left: 20px;
+            right: 20px;
+            background: white;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            gap: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            
+            /* Animation de fermeture */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0); /* On l'affiche */
+        }
+
+        .mobile-overlay a {
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        /* --- HERO --- */
         .hero {
             flex-grow: 1;
             display: flex;
@@ -118,7 +157,6 @@
             letter-spacing: -1.5px;
         }
 
-        /* --- LE CARROUSEL --- */
         .art-carousel {
             display: flex;
             justify-content: center;
@@ -207,7 +245,7 @@
 
         .btn-secondary {
             background: none;
-            border: none;
+            border: 2px solid #000;
             padding: 15px 30px;
             border-radius: 40px;
             font-weight: 500;
@@ -215,8 +253,7 @@
             cursor: pointer;
         }
 
-        /* --- AJOUTS RESPONSIVE --- */
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
             .hero-title { font-size: 3rem; }
             .art-card { width: 200px; height: 260px; margin-left: -100px; }
@@ -225,20 +262,10 @@
 
         @media (max-width: 768px) {
             html, body { overflow-y: auto; }
-
-            /* Afficher le bouton menu burger seulement sur mobile */
-            .mobile-menu-btn { 
-                display: flex; 
-            }
-
-            .logo { display: none; } /* Cacher le logo au centre pour le menu à gauche */
-            .nav-links { display: none; } /* Cacher les liens de navigation */
-
-            /* Cacher toutes les icônes de droite sauf la première (Profil) */
-            .header-actions .icon-btn:not(.user-btn) {
-                display: none;
-            }
-
+            .mobile-menu-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; }
+            .logo { position: absolute; left: 50%; transform: translateX(-50%); display: flex; } 
+            .nav-links { display: none; }
+            .header-actions .icon-btn:not(.user-btn) { display: none; }
             .hero-title { font-size: 2.2rem; }
             .hero-description { font-size: 1rem; }
             .art-carousel { height: 280px; }
@@ -253,9 +280,17 @@
 <body>
 
 <div class="page-wrapper">
+    <nav class="mobile-overlay" id="mobileMenu">
+        <a href="#">Meuble</a>
+        <a href="#">Louer</a>
+        <a href="#">Contact</a>
+        <a href="#">Villas de luxe</a>
+        <a href="#">Agences</a>
+    </nav>
+
     <header class="main-header">
-        <button class="icon-btn mobile-menu-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <button class="mobile-menu-btn" id="burgerBtn">
+            <svg id="burgerIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
 
         <div class="logo">
@@ -268,13 +303,9 @@
         </div>
 
         <nav class="nav-links">
-            <a href="#">Acheter</a>
-            <a href="#" class="with-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                Estimer mon bien
-            </a>
+            <a href="#">Meuble</a>
             <a href="#">Louer</a>
-            <a href="#">Investir</a>
+            <a href="#">Contact</a>
             <a href="#">Villas de luxe</a>
             <a href="#">Agences</a>
         </nav>
@@ -301,7 +332,7 @@
 
         <div class="art-carousel">
             <div class="user-bubble bubble-left">
-                <span class="user-tag">@lyon_luxe</span>
+                <span class="user-tag">@Bamako</span>
                 <div class="bubble-arrow"></div>
             </div>
 
@@ -313,7 +344,7 @@
             <div class="art-card card-6"><img src="M7.jpg" alt="Chalet de Prestige"></div>
 
             <div class="user-bubble bubble-right">
-                <span class="user-tag">@paris_loft</span>
+                <span class="user-tag">@Abidjan</span>
                 <div class="bubble-arrow"></div>
             </div>
         </div>
@@ -329,6 +360,38 @@
     </main>
 </div>
 
+<script>
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const burgerIcon = document.getElementById('burgerIcon');
+
+    burgerBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('active');
+        
+        if (isOpen) {
+            // Icône Fermer (X)
+            burgerIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+        } else {
+            // Icône Menu (Hamburger)
+            burgerIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+        }
+    });
+
+    // Fermer le menu si on clique en dehors de la carte
+    window.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !burgerBtn.contains(e.target) && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            burgerIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+        }
+    });
+
+    document.querySelectorAll('.mobile-overlay a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            burgerIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+        });
+    });
+</script>
+
 </body>
 </html>
-
