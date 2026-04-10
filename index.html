@@ -275,6 +275,25 @@
             .hero-actions { flex-direction: column; width: 100%; align-items: center; }
             .btn-primary, .btn-secondary { width: 100%; max-width: 280px; }
         }
+        /* Force les icônes à être noires et supprime la couleur bleue de Safari */
+.mobile-menu-btn svg, 
+.icon-btn svg, 
+.btn-secondary {
+    color: #000 !important;
+    stroke: #000 !important;
+}
+
+/* Fix spécifique pour le bouton "Parler à un expert" */
+.btn-secondary {
+    color: #000 !important;
+    border-color: #000 !important;
+    text-decoration: none; /* Au cas où Safari le prend pour un lien */
+}
+
+/* Pour l'icône de profil spécifiquement */
+.user-btn svg {
+    stroke: #000 !important;
+}
     </style>
 </head>
 <body>
