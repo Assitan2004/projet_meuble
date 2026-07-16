@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pallet Ross — Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+     <link rel="stylesheet" href="contact.css">
+  
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="main-header">
+    <button class="mobile-menu-btn" id="burgerBtn">
+        <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <a href="index.html" class="logo">
+        <img src="Images/logo1.png" alt="" width="60" height="60">
+        <span>Pallet Ross</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="produits.html">Meuble</a>
+        <a href="architect.html">Architecture</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+        <button class="icon-btn  user-btn">
+            <a href="inscription.html" style="color:#111;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </a>
+        </button>
+        <button class="icon-btn">
+            <a href="favoris.html " style="color:#111;">
+                <span class="material-symbols-outlined">favorite</span>
+            </a>
+        </button>
+        <button class="icon-btn">
+            <a href="panier.html" style="color:#111;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+            </a>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobileMenu">
+    <a href="index.html">Accueil</a>
+    <a href="produits.html">Meuble</a>
+    <a href="architect.html">Architecture</a>
+    <a href="contact.html">Contact</a>
+    <a href="favoris.html">Favoris</a>
+    <a href="panier.html">Panier</a>
+    <a href="connexion.html">Mon compte </a>
+</div>
+
+<!-- ═══════════ HERO BANNER ═══════════ -->
+
+
+<!-- ═══════════ PAGE BODY ═══════════ -->
+<div class="page-body">
+    <p class="section-eyebrow">Formulaire de contact</p>
+
+    <div class="contact-grid">
+
+        <!-- ─── FORM ─── -->
+        <div class="contact-form-wrap">
+            <h2 class="form-title">Une question,<br><em>un projet ?</em></h2>
+            <p class="form-subtitle">Notre équipe de conseillers vous répond sous 24 heures ouvrées. Décrivez-nous votre projet et nous vous proposerons la solution la plus adaptée.</p>
+
+            <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div class="field-group">
+                        <label>Nom complet</label>
+                        <input type="text" placeholder="Votre nom et prénom" required>
+                    </div>
+                    <div class="field-group">
+                        <label>Adresse e-mail</label>
+                        <input type="email" placeholder="votre@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="field-group">
+                        <label>Téléphone</label>
+                        <input type="tel" placeholder="+33 6 00 00 00 00">
+                    </div>
+                    <div class="field-group">
+                        <label>Objet de la demande</label>
+                        <div class="select-wrap">
+                            <select id="subjectSelect" onchange="this.classList.add('filled')" required>
+                                <option value="" disabled selected>Choisir une option…</option>
+                                <option>Demande de devis — Sur mesure</option>
+                                <option>Information produit — Catalogue</option>
+                                <option>Suivi de commande</option>
+                                <option>Aménagement intérieur</option>
+                                <option>Collaboration / Presse</option>
+                            </select>
+                            <svg class="select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="field-group">
+                        <label>Date de projet (optionnel)</label>
+                        <input type="date">
+                    </div>
+                    <div class="field-group">
+                        <label>Quantité / Précisions</label>
+                        <input type="text" placeholder="Ex : 1 table, 4 chaises…">
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="field-group">
+                        <label>Votre message</label>
+                        <textarea placeholder="Décrivez-nous votre projet, vos inspirations, vos contraintes…"></textarea>
+                    </div>
+                </div>
+
+                <div class="submit-row">
+                    <button type="submit" class="btn-send" id="btnSend">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Envoyer ma demande
+                    </button>
+                    <button type="submit" class="btn-circle" aria-label="Envoyer">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </button>
+                </div>
+
+                <div class="form-success" id="formSuccess">
+                    <span class="material-symbols-outlined" style="font-size:22px;color:#2ecc71;">check_circle</span>
+                    Message envoyé ! Nous vous répondons sous 24 h.
+                </div>
+            </form>
+        </div>
+
+        <!-- ─── SIDEBAR ─── -->
+        <div class="contact-sidebar">
+            <div class="sidebar-img-card">
+                <img src="Images/M4.jpg" alt="Showroom Pallet Ross">
+                <span class="sidebar-badge">Showroom Paris</span>
+            </div>
+
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <span class="material-symbols-outlined">call</span>
+                    </div>
+                    <div class="info-card-body">
+                        <div class="info-card-title">Téléphone & WhatsApp</div>
+                        <div class="info-card-detail">
+                            <a href="tel:+33123456789">+33 1 23 45 67 89</a><br>
+                            <a href="tel:+33678901234">+33 6 78 90 12 34</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <span class="material-symbols-outlined">mail</span>
+                    </div>
+                    <div class="info-card-body">
+                        <div class="info-card-title">Nous écrire</div>
+                        <div class="info-card-detail">
+                            <a href="mailto:contact@palletross.com">contact@palletross.com</a><br>
+                            <a href="mailto:pro@palletross.com">pro@palletross.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div class="info-card-body">
+                        <div class="info-card-title">Heures d'ouverture</div>
+                        <div class="info-card-detail">
+                            Lun–Sam : 9h00 – 19h00<br>
+                            Dimanche : Fermé
+                        </div>
+                        <div class="response-chip">En ligne · Répond sous 24 h</div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <span class="material-symbols-outlined">location_on</span>
+                    </div>
+                    <div class="info-card-body">
+                        <div class="info-card-title">Notre showroom</div>
+                        <div class="info-card-detail">
+                            42 Rue du Faubourg Saint-Antoine<br>
+                            75012 Paris, France
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ═══════════ INFO STRIP ═══════════ -->
+<section class="info-strip reveal">
+    <div class="strip-grid">
+        <div class="strip-cell">
+            <span class="strip-number">01</span>
+            <div class="strip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="strip-title">Visite privée</div>
+            <div class="strip-detail">Sur rendez-vous, découvrez nos pièces en exclusivité dans notre showroom parisien.</div>
+        </div>
+        <div class="strip-cell">
+            <span class="strip-number">02</span>
+            <div class="strip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div class="strip-title">Conseil en ligne</div>
+            <div class="strip-detail">Nos conseillers vous accompagnent par visio pour définir vos besoins et votre budget.</div>
+        </div>
+        <div class="strip-cell">
+            <span class="strip-number">03</span>
+            <div class="strip-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="strip-title">Création sur mesure</div>
+            <div class="strip-detail">De la conception 3D à la livraison, nous fabriquons la pièce de vos rêves en 8 semaines.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CTA DARK BANNER ═══════════ -->
+<section class="cta-banner reveal">
+    <div class="cta-inner">
+        <div class="cta-left">
+            <span class="cta-pill">✦ Nouvelle collection</span>
+            <h2>Sublimez votre<br><em>intérieur</em> avec<br>nos pièces uniques</h2>
+            <p>Découvrez notre catalogue de mobilier artisanal et trouvez la pièce qui donnera du caractère à votre espace.</p>
+        </div>
+        <div class="cta-right">
+            <div class="cta-img"><img src="Images/header_5.jpeg" alt="Table bois massif"></div>
+            <div class="cta-img"><img src="Images/header_4.jpeg" alt="Salon design"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="main-footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+                <img src="logo1.png" alt="" width="60" height="60">
+                Pallet Ross
+            </a>
+            <p>Plus qu'une agence, un curateur de biens rares et de mobilier d'exception. Chaque adresse est une œuvre, chaque pièce une signature.</p>
+            <div class="footer-social">
+                <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                <a href="#" class="social-btn" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="#" class="social-btn" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.22-5.15 1.22-5.15s-.31-.62-.31-1.54c0-1.44.84-2.52 1.88-2.52.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.88 1.54 1.88 1.84 0 3.08-2.37 3.08-5.17 0-2.13-1.44-3.62-3.49-3.62-2.38 0-3.77 1.79-3.77 3.63 0 .72.28 1.49.62 1.91.07.08.08.15.06.23-.06.27-.21.85-.24.97-.04.16-.13.19-.3.11-1.11-.52-1.8-2.14-1.8-3.44 0-2.8 2.03-5.36 5.85-5.36 3.07 0 5.46 2.19 5.46 5.11 0 3.05-1.92 5.5-4.58 5.5-.9 0-1.74-.47-2.02-1.02l-.55 2.07c-.2.77-.74 1.73-1.1 2.32.83.26 1.71.4 2.62.4 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+            </div>
+        </div>
+        <div class="footer-col"><h4>Explorer</h4><ul><li><a href="#">Villas de luxe</a></li><li><a href="#">Appartements</a></li><li><a href="#">Mobilier</a></li><li><a href="#">Nouveautés</a></li><li><a href="#">Best Sellers</a></li></ul></div>
+        <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Aménagement intérieur</a></li><li><a href="#">Visite privée</a></li><li><a href="#">Sur mesure</a></li><li><a href="#">Nos agences</a></li><li><a href="#">Contact</a></li></ul></div>
+        <div class="footer-col footer-newsletter"><h4>Newsletter</h4><p>Recevez en avant-première nos nouvelles adresses et pièces d'exception.</p><div class="newsletter-form"><input type="email" placeholder="votre@email.com"><button type="button">OK →</button></div></div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Pallet Ross. Tous droits réservés.</p>
+        <div class="footer-legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">CGV</a></div>
+    </div>
+</footer>
+
+<!-- Chatbot -->
+<div id="chatbot-launcher"><span class="material-symbols-outlined">forum</span></div>
+<div id="chat-window">
+    <div class="chat-header"><span>Pallet Ross Assistant</span><span id="close-chat" style="cursor:pointer" class="material-symbols-outlined">close</span></div>
+    <div class="chat-body" id="chat-content"><div class="message bot">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div></div>
+    <div class="chat-footer"><input type="text" id="chat-input" placeholder="Écrivez votre message…"><button id="send-chat"><i class="fas fa-paper-plane"></i></button></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+    /* ─── Mobile menu ─── */
+    const burgerBtn  = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burgerBtn.addEventListener('click', e => { e.stopPropagation(); mobileMenu.classList.toggle('active'); });
+    document.addEventListener('click', e => { if (!burgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove('active'); });
+
+    /* ─── Form submit ─── */
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn     = document.getElementById('btnSend');
+        const success = document.getElementById('formSuccess');
+
+        btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Envoyé avec succès !`;
+        btn.style.background = '#2a7a2a';
+
+        success.classList.add('show');
+
+        showToast('Message envoyé ! On vous répond sous 24 h ✓');
+
+        setTimeout(() => {
+            btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer ma demande`;
+            btn.style.background = '';
+            success.classList.remove('show');
+        }, 4000);
+    }
+
+    /* ─── Toast ─── */
+    const toastEl = document.getElementById('toast');
+    let toastTimer;
+    function showToast(msg) {
+        clearTimeout(toastTimer);
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000);
+    }
+
+    /* ─── Scroll reveal ─── */
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ─── Chatbot ─── */
+    const launcher   = document.getElementById('chatbot-launcher');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChat  = document.getElementById('close-chat');
+    const sendBtn    = document.getElementById('send-chat');
+    const chatInput  = document.getElementById('chat-input');
+    const chatContent= document.getElementById('chat-content');
+
+    launcher.onclick  = () => chatWindow.style.display = 'flex';
+    closeChat.onclick = () => chatWindow.style.display = 'none';
+
+    function sendMsg() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        const u = document.createElement('div');
+        u.className = 'message user'; u.innerText = text;
+        chatContent.appendChild(u);
+        chatInput.value = '';
+        chatContent.scrollTop = chatContent.scrollHeight;
+        setTimeout(() => {
+            const b = document.createElement('div');
+            b.className = 'message bot';
+            b.innerText = 'Merci ! Un conseiller Pallet Ross vous répondra très bientôt.';
+            chatContent.appendChild(b);
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }, 900);
+    }
+    sendBtn.onclick  = sendMsg;
+    chatInput.onkeypress = e => { if (e.key === 'Enter') sendMsg(); };
+</script>
+</body>
+</html>
